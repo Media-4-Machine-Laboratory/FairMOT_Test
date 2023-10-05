@@ -20,7 +20,8 @@ RUN apt-get -y update && apt-get -y install sudo \
     bzip2 \
     build-essential \
     libx11-6 \
-    curl
+    curl \
+    ca-certificates
     
 
 # directory settings
@@ -39,7 +40,10 @@ RUN wget https://repo.anaconda.com/archive/$ANACONDA_VERSION && \
 RUN conda activate test && \
     conda install -c conda-forge jupyterlab nodejs && \
     jupyter labextension install @jupyterlab/debugger && \
-    conda install xeus-python -c conda-forge
-RUN pip install cython 
+    conda install xeus-python -c conda-forge && \
+    conda install pytorch cudatoolkit torch torchvision
+RUN pip install numpy pandas matplotlib cython torch torchvision opencv-python
 
 # jupyter setting
+EXPOSE 8888
+ENTRYPOINT ["jupyter", "lab","--ip=0.0.0.0","--allow-root"]
