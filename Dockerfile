@@ -8,6 +8,7 @@ LABEL description="Setting FairMOT"
 # ENV
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
+ENV CONDA_PYTHON_VERSION
 
 # apt-get init
 RUN apt-get -y update && apt-get -y install sudo \
@@ -16,7 +17,8 @@ RUN apt-get -y update && apt-get -y install sudo \
     python3 \
     python3-pip \
     ninja-build \
-    bzip2
+    bzip2 \
+    build-essential
 
 # conda install
 ENV ANACONDA_VERSION=Anaconda3-2023.09-0-Linux-x86_64.sh
