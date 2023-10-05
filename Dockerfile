@@ -30,17 +30,16 @@ WORKDIR /src
 RUN mkdir data
 
 # conda install
-ENV ANACONDA_VERSION=Anaconda3-2023.09-0-Linux-x86_64.sh
-RUN wget https://repo.anaconda.com/archive/$ANACONDA_VERSION && \
-    sh $ANACONDA_VERSION && \
-    echo "/anaconda3" >> ~/.bashrc" && source ~/.bashrc && \
+ENV ANACONDA_VERSION=Miniconda3-latest-Linux-x86_64.sh
+RUN wget https://repo.anaconda.com/miniconda/$ANACONDA_VERSION -O ~/miniconda3/miniconda.sh && \
+    bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3 && \
+    rm -rf ~/miniconda3/miniconda.sh && \
+    echo "export PATH=~/miniconda3/bin:PATH" >> ~/.bashrc && source ~/.bashrc && \
     conda create -n test python=$CONDA_PYTHON_VERSION
 
 # conda activate & install packages
 RUN conda activate test && \
-    conda install -c conda-forge jupyterlab nodejs && \
-    jupyter labextension install @jupyterlab/debugger && \
-    conda install xeus-python -c conda-forge && \
+    conda install -c conda-forge jupyterlab && \
     conda install pytorch cudatoolkit torch torchvision
 RUN pip install numpy pandas matplotlib cython torch torchvision opencv-python
 
