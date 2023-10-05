@@ -8,7 +8,7 @@ LABEL description="Setting FairMOT"
 # ENV
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
-ENV CONDA_PYTHON_VERSION
+ENV CONDA_PYTHON_VERSION=3.9
 
 # apt-get init
 RUN apt-get -y update && apt-get -y install sudo \
