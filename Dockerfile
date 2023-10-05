@@ -26,3 +26,7 @@ RUN wget https://repo.anaconda.com/archive/$ANACONDA_VERSION && \
     sh $ANACONDA_VERSION && \
     echo "/anaconda3" >> ~/.bashrc" && source ~/.bashrc && \
     conda create -n test python=$CONDA_PYTHON_VERSION
+
+# conda activate & install packages
+
+# jupyter setting
