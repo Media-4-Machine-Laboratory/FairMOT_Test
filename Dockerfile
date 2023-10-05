@@ -23,4 +23,5 @@ RUN apt-get -y update && apt-get -y install sudo \
 # conda install
 ENV ANACONDA_VERSION=Anaconda3-2023.09-0-Linux-x86_64.sh
 RUN wget https://repo.anaconda.com/archive/$ANACONDA_VERSION && \
-    sh $ANACONDA_VERSION
+    sh $ANACONDA_VERSION && \
+    conda create -n test python=$CONDA_PYTHON_VERSION
