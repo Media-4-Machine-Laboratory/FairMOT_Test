@@ -18,7 +18,10 @@ RUN apt-get -y update && apt-get -y install sudo \
     python3-pip \
     ninja-build \
     bzip2 \
-    build-essential
+    build-essential \
+    libx11-6 \
+    curl
+    
 
 # directory settings
 RUN mkdir src
@@ -33,5 +36,10 @@ RUN wget https://repo.anaconda.com/archive/$ANACONDA_VERSION && \
     conda create -n test python=$CONDA_PYTHON_VERSION
 
 # conda activate & install packages
+RUN conda activate test && \
+    conda install -c conda-forge jupyterlab nodejs && \
+    jupyter labextension install @jupyterlab/debugger && \
+    conda install xeus-python -c conda-forge
+RUN pip install cython 
 
 # jupyter setting
